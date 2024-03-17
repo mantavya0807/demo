@@ -181,7 +181,7 @@ def result(request):  # Renamed function for clarity
         return render(request, 'result.html', context) 
     else:
         # If form is not valid, re-render the form page 
-        return render(request, 'encyclopedia/details.html', {'form': form})
+        return render(request, 'encyclopedia/result.html', {'form': form})
     return render(request, 'encyclopedia/result.html', {'form': form})
 
 def post(request):
