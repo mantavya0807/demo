@@ -1,16 +1,63 @@
-{% extends "encyclopedia/layout.html" %}
+{% load static %}
 
-{% block title %}
-    Encyclopedia
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AgriScience</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="{% static 'encyclopedia/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+        .chatbot-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-right: 40px;
+            background-color: #4169e1;
+            font-size: 20px; /* Increase the font size */
+            color: white;
+            padding: 10px 20px; /* Add some padding */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'index' %}">AgriScience</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'services' %}">Services</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'login' %}" class="button">Login</a></li>
+                    <li><a href="{% url 'signup' %}" class="button">Signup</a></li>
+                </ul>
+                <a href="{% url 'chatbot' %}" class="button chatbot-button">Chatbot</a>
+            </div>
+        </div>
+    </nav>
+    </nav>
+    <div class="container about-section">
+        <h2>About Us</h2>
+        <h2>Comprehensive Analysis:</h2>
+        <p>AgriSense conducts a thorough analysis of various factors influencing farming outcomes, including soil type, climate conditions, crop requirements, and market trends.</p>
 
-{% block body %}
-    <h1>All Pages</h1>
+        <h2>Yield Prediction:</h2>
+        <p>Leveraging predictive modeling techniques, AgriSense estimates crop yield based on historical data, current conditions, and future projections, enabling farmers to set realistic production targets and plan accordingly.</p>
 
-    <ul>
-        {% for entry in entries %}
-            <li><a href="http://127.0.0.1:8000/wiki/{{ entry }}">{{ entry }}</a></li>
-        {% endfor %}
-    </ul>
+        <h2>Cost Projection:</h2>
+        <p>AgriSense evaluates cost factors such as seed expenses, labor costs, equipment maintenance, and irrigation requirements to provide accurate cost projections for farming activities, facilitating better budgeting and resource allocation.</p>
 
-{% endblock %}
+        <h2>Crop Rotation Planning:</h2>
+        <p>AgriSense generates personalized crop rotation schedules considering factors like soil health, pest management, and nutrient replenishment, aiding farmers in improving soil fertility, reducing pest pressure, and enhancing overall crop productivity.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <div class="container">
+    <h1>Farm Calculator</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}  
+      <a href="{% url 'results' %}" class="btn btn-primary type='submit'">Calculate</a>
+    </form>
+    </div>
+</body>
+</html>

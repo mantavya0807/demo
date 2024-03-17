@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .conversation-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+
+    .message-container {
+        margin-bottom: 20px;
+    }
+
+    .user-message {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        width: fit-content;
+        float: right;
+    }
+
+    .bot-message {
+        background-color: #010703;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        width: fit-content;
+        float: left;
+    }
+
+    .message-content {
+        clear: both;
+    }
+
+    .chat-input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .submit-btn {
+        width: calc(100% - 20px);
+        padding: 10px;
+        background-color: #051220;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="conversation-container">
+                <div class="message-container">
+                    <div class="bot-message message-content">Hello! How can I assist you today?</div>
+                </div>
+
+                <!-- Display the conversation thread here -->
+                {% for message in conversation %}
+                    {% if message.sender == 'user' %}
+                        <div class="message-container">
+                            <div class="user-message message-content">{{ message.content }}</div>
+                        </div>
+                    {% else %}
+                        <div class="message-container">
+                            <div class="bot-message message-content">{{ message.content }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- User input form -->
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" class="chat-input" name="user_input" placeholder="Type your message here" required>
+                    <button type="submit" class="submit-btn">Send</button>
+                </form>
+            </div>
+          {% if response %}
+    <div class="mt-3">
+        <h4>Response:</h4>
+        <p>{{ response }}</p>
+    </div>
+{% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
