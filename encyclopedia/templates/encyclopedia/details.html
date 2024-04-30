@@ -1,13 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px; /* Add some space below each label */
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px; /* Add some space above the select box */
+}
+
+
+        .btn-primary {
+            background-color: black;
+            color: #fff;
+            border: none;
+           
+            padding: 10px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #000; /* Change to black on hover */
+        }
+
+        .btn-secondary {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .btn-logout {
+            top: 20px;
+            right: 20px;
+        }
+
+        .btn-chatbot {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .result {
+            margin-top: 30px;
+            background-color: #d4edda;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
 <body>
-  <div class="container">
-    <h1>Farm Calculator</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form }}  
-      <a href="{% url 'results' %}" class="btn btn-primary type='submit'">Calculate</a>
-    </form>
-    </div>
+    <div class="container">
+        <h1>Farm Calculator</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="size">Farm Size (Acres):</label>
+                <input type="number" id="size" name="size" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="capital">Available Capital:</label>
+                <input type="number" id="capital" name="capital" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="equipment">Equipment:</label>
+                <select id="equipment" name="equipment" required multiple>
+                    <option value="tractor">Tractor</option>
+                    <option value="seeder">Seeder</option>
+                    <option value="seed_drill">Seed Drill</option>
+                    <option value="irrigation_system">Irrigation System</option>
+                    <option value="harvester">Harvester</option>
+                    <option value="fertilizer">Fertilizer</option>
+                    <option value="spreader">Spreader</option>
+                    <option value="pesticide_sprayer">Pesticide Sprayer</option>
+                    <option value="plough">Plough</option>
+                    <option value="cultivator">Cultivator</option>
+                    <option value="aerial_applicator">Aerial Applicator</option>
+                </select>
+            </div>                          
+            <div class="form-group">
+                <label for="soil_type">Soil Type:</label>
+                <select id="soil_type" name="soil_type" required>
+                    <option value="" selected disabled hidden></option>
+                    <option value="Desert Soil">Desert Soil</option>
+                    <option value="Arctic Soil">Arctic Soil</option>
+                    <option value="Tundra Soil">Tundra Soil</option>
+                    <option value="Permafrost">Permafrost</option>
+                    <option value="Taiga Soil">Taiga Soil</option>
+                    <option value="Red Soil">Red Soil</option>
+                    <option value="Brown Soil">Brown Soil</option>
+                    <option value="Black Soil">Black Soil</option>
+                    <option value="Rain forest Soil">Rain forest Soil</option>
+                </select>
+            </div>
+            <a href="{% url 'results' %}" class="btn btn-primary type = 'Submit'">Calculate</a>
+        </form>
+        <a href="{% url 'logout' %}" class="btn btn-secondary btn-logout">Logout</a>
+        <a href="core/main.html" class="btn btn-secondary btn-chatbot">Chatbot</a>
+        {% if result %}
+            <div class="result">
+                <p>Result for {{ form.cleaned_data.location }} with {{ form.cleaned_data.equipment }} and a size of {{ form.cleaned_data.size }} acres is: {{ result }}</p>
+            </div>
+        {% endif %}
+    </div>   
 </body>
 </html>

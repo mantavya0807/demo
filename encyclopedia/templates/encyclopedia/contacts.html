@@ -3,18 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <!-- Your CSS here -->
+    <title>Contact Information</title>
+    <style>
+        /* Container styles */
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #fff; /* White background */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading styles */
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000; /* Black color */
+        }
+
+        /* Contact box styles */
+        .contact-box {
+            margin-bottom: 20px;
+        }
+
+        /* Bold text style */
+        .bold-text {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <h1 class="bold-text">Contact Information</h1>
+
     <div class="container">
-        <h2 class="contact-us">Contact Us</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="contact-box">
+            <h2>Mantavya Mahajan</h2>
+            <p><strong>Email:</strong> mbm6898@psu.edu</p>
+            <p><strong>Phone:</strong> +1 (564) 544-4219</p>
+        </div>
+        
+        <div class="contact-box">
+            <h2>Aayush Mehta</h2>
+            <p><strong>Email:</strong> akm7214@psu.edu</p>
+            <p><strong>Phone:</strong> +1 (814) 325-1306</p>
+        </div>
+
+        <div class="contact-box">
+            <h2>Suryansh Agarwal</h2>
+            <p><strong>Email:</strong> sms6879@psu.edu</p>
+            <p><strong>Phone:</strong> +1 (646) 673-1877</p>
+        </div>
+
+        <div class="contact-box">
+            <h2>Manhar Soin</h2>
+            <p><strong>Email:</strong> mvs7148@psu.edu</p>
+            <p><strong>Phone:</strong> +1 (814) 769-0325</p>
+        </div>
     </div>
 </body>
 </html>

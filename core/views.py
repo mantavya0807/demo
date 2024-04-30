@@ -3,7 +3,7 @@ import openai, os
 from dotenv import load_dotenv
 
 load_dotenv()
-api_key='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'
+api_key='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'
 def process_message(message):
     # This is just an example. Replace this with your actual processing code.
     return f"You said: {message}"

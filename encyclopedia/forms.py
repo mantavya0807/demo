@@ -33,43 +33,43 @@ class LoginForm(forms.Form):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}))
     password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
-class FarmCalculatorForm(forms.Form):
-    location = forms.CharField(max_length=100, required=True)
-    size = forms.IntegerField(label="Farm Size (Acres)", min_value=0, required=True)
-    capital = forms.IntegerField(label="Available Capital", min_value=0, required=True)
-    equipment = forms.ChoiceField(choices=[
-        ('', '--Select--'),
-        ('tractor', 'Tractor'), 
-        ('combine', 'Combine Harvester'),
-        ('other', 'Other')
-     ], required=True)
+class FarmForm(forms.Form):
+    EQUIPMENT_CHOICES = [
+        ('tractor', 'Tractor'),
+        ('seeder', 'Seeder'),
+        ('seed_drill', 'Seed Drill'),
+        ('irrigation_system', 'Irrigation System'),
+        ('harvester', 'Harvester'),
+        ('fertilizer', 'Fertilizer'),
+        ('spreader', 'Spreader'),
+        ('pesticide_sprayer', 'Pesticide Sprayer'),
+        ('plough', 'Plough'),
+        ('cultivator', 'Cultivator'),
+        ('aerial_applicator', 'Aerial Applicator'),
+    ]
+
+    SOIL_TYPE_CHOICES = [
+        ('', '--- Select ---'),
+        ('Desert Soil', 'Desert Soil'),
+        ('Arctic Soil', 'Arctic Soil'),
+        ('Tundra Soil', 'Tundra Soil'),
+        ('Permafrost', 'Permafrost'),
+        ('Taiga Soil', 'Taiga Soil'),
+        ('Red Soil', 'Red Soil'),
+        ('Brown Soil', 'Brown Soil'),
+        ('Black Soil', 'Black Soil'),
+        ('Rain forest Soil', 'Rain forest Soil'),
+    ]
+
+    location = forms.CharField(label='Location', max_length=100)
+    farm_size = forms.FloatField(label='Farm Size')
+    capital = forms.FloatField(label='Capital')
+    soil_type = forms.ChoiceField(label='Soil Type', choices=SOIL_TYPE_CHOICES)
+    equipment = forms.MultipleChoiceField(label='Equipment', choices=EQUIPMENT_CHOICES, widget=forms.CheckboxSelectMultiple)
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}))
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Message', 'rows': 5}), required=True)
 
-from django import forms
 
-class FarmCalculatorForm(forms.Form):
-    location = forms.CharField(max_length=50, required=True)
-    farm_size = forms.IntegerField(min_value=0, required=True)
-    capital = forms.IntegerField(min_value=0, required=True)
-    equipment = forms.MultipleChoiceField(
-        required=True,
-        widget=forms.SelectMultiple,
-        choices=[
-            ('tractor', 'Tractor'),
-            ('seeder', 'Seeder'),
-            # ... add all your equipment choices ...
-        ]
-    )
-    soil_type = forms.ChoiceField(
-        required=True,
-        choices=[
-            ('', 'Select a soil type'),  # Placeholder option
-            ('Desert Soil', 'Desert Soil'),
-            ('Arctic Soil', 'Arctic Soil'),
-            # ... add all your soil type choices ...
-        ]
-    ) 
